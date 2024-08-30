@@ -1,8 +1,24 @@
 import { createApp } from 'vue'
-import ExampleComponent from './components/ExampleComponent.vue'
+import ExampleComponent from '@cms/components/ExampleComponent.vue'
+import { useTranslations } from './composables/useTranslations'
+import '../css/app.css'
 
-const app = createApp({})
+export function init(el, initialTranslations) {
+    const app = createApp({
+        setup() {
+        const { initTranslations, getLanguagePreference, setLocale, trans } = useTranslations()
+        const storedLocale = getLanguagePreference()
+        initTranslations(initialTranslations, storedLocale)
 
-app.component('example-component', ExampleComponent)
+        return {
+            setLocale,
+            trans
+        }
+        },
+        template: '<example-component></example-component>'
+    })
 
-app.mount('#app')
+    app.component('example-component', ExampleComponent)
+
+    app.mount(el)
+}

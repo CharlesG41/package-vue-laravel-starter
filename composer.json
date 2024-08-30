@@ -1,0 +1,21 @@
+{
+    "name": "charlesg/cms",
+    "description": "A simple cms",
+    "type": "library",
+    "require": {
+        "php": "^8.1",
+        "laravel/framework": "^10.0",
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Charlesg\\Cms\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Charles Giguere",
+            "email": "charles.giguere41@gmail.com"
+        }
+    ]
+}

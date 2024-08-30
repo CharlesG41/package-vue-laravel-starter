@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('cms', function() {
     return view('cms');
 });
+Route::post('/change-language', [Charlesg\Cms\app\Http\Controllers\LocaleController::class, 'changeLanguage'])
+     ->name('charlesg.change-language');
 
 //
 //Route::get('login', [ViewsController::class, 'login'])->name('login');
