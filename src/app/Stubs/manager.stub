@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Managers;
+
+use Illuminate\Http\Request;
+use Cyvian\Src\App\Models\Cyvian\Entry;
+
+class {{ modelName }}Manager extends {{ extendsClass }}
+{
+    public function store(Request $request): ActionResponse
+    {
+        return parent::baseStore($request->input('values'), $request->input('form'));
+    }
+
+    public function update(Request $request, int $id): ActionResponse
+    {
+        return parent::baseUpdate($request->input('values'), $request->input('form'), Entry::find($id));
+    }
+
+    public function delete(Request $request): ActionResponse
+    {
+        return parent::baseDelete(Entry::find($request->input('id')));
+    }
+
+    public function massDelete(Request $request): ActionResponse
+    {
+        return parent::baseMassDelete($request->input('ids'));
+    }
+}
