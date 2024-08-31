@@ -2,6 +2,7 @@
 
 namespace Charlesg\Cms;
 
+use Charlesg\Cms\App\Http\Middleware\SetLocaleMiddleware;
 use Genl\Matice\MaticeServiceProvider;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
@@ -23,20 +24,10 @@ class CmsServiceProvider extends ServiceProvider
         // js, assets
         $this->publishes([
             __DIR__.'/../dist' => public_path('vendor/charlesg-cms'),
-        ], 'charlesg-cms-assets');
-        
+            __DIR__.'/resources/views' => resource_path('views/charlesg-cms'),
+            __DIR__.'/resources/lang' => resource_path('lang/charlesg-cms'),
+        ], 'charlesg-cms-base');
 
-        // translations
-        $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang/charlesg'),
-        ], 'charlesg-cms-translations');
-
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'charlesg');
-
-         // Register the middleware
-         $this->app['router']->aliasMiddleware('set-locale', SetLocaleMiddleware::class);
-
-         // Apply the middleware to all web routes
-         $this->app['router']->pushMiddlewareToGroup('web', 'set-locale');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'charlesg-cms');
     }
 }

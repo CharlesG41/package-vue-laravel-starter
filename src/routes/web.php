@@ -20,11 +20,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('cms', function() {
-    return view('cms');
+
+Route::middleware(\Charlesg\Cms\App\Http\Middleware\SetLocaleMiddleware::class) ->group(function() {
+    Route::get('cms', function() {
+        return view('charlesg-cms/cms');
+    });
+
+    Route::post('/change-language', [Charlesg\Cms\app\Http\Controllers\LocaleController::class, 'changeLanguage'])
+        ->name('charlesg.change-language');
 });
-Route::post('/change-language', [Charlesg\Cms\app\Http\Controllers\LocaleController::class, 'changeLanguage'])
-     ->name('charlesg.change-language');
+
 
 //
 //Route::get('login', [ViewsController::class, 'login'])->name('login');

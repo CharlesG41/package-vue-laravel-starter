@@ -1,13 +1,13 @@
-import { ref as d, openBlock as y, createElementBlock as L, createElementVNode as f, toDisplayString as m, unref as l, createTextVNode as S, createApp as b } from "vue";
-function E() {
-  const c = d({}), a = d(""), s = function(t, n = {}) {
-    let e = t.split(".").reduce((r, v) => r == null ? void 0 : r[v], c.value);
+import { ref as f, openBlock as b, createElementBlock as y, createElementVNode as u, toDisplayString as m, unref as i, createApp as L } from "vue";
+function S() {
+  const g = window.__INITIAL_TRANSLATIONS__, a = f(g), s = function(o, n = {}) {
+    let e = o.split(".").reduce((r, _) => r == null ? void 0 : r[_], a.value);
     return typeof e == "string" && Object.keys(n).forEach((r) => {
       e = e.replace(`:${r}`, n[r]);
-    }), e || t;
-  }, u = (t) => {
-    localStorage.setItem("userLanguage", t);
-  }, i = () => localStorage.getItem("userLanguage") || document.documentElement.lang || "en", o = async function(t) {
+    }), e || o;
+  }, d = (o) => {
+    localStorage.setItem("userLanguage", o);
+  }, c = () => localStorage.getItem("userLanguage") || document.documentElement.lang || "en", t = f(c()), l = async function(o) {
     try {
       const e = await (await fetch("/change-language", {
         method: "POST",
@@ -15,41 +15,43 @@ function E() {
           "Content-Type": "application/json",
           "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
         },
-        body: JSON.stringify({ locale: t })
+        body: JSON.stringify({ locale: o })
       })).json();
-      c.value = e.translations, a.value = e.locale, u(e.locale);
+      a.value = e.translations, t.value = e.locale, d(e.locale);
     } catch (n) {
       console.error("Failed to change language:", n);
     }
-  }, g = function() {
-    return a.value;
-  }, p = async function(t, n) {
-    const e = i();
-    e !== n ? await o(e) : (c.value = t, a.value = n);
+  }, v = function() {
+    return t.value;
+  }, p = async function(o, n) {
+    const e = c();
+    console.log(e, n), e !== n ? await l(e) : (a.value = o, t.value = n);
   };
-  return p(c.value, a.value), {
+  return p(a.value, t.value), {
     trans: s,
-    setLocale: o,
-    getLocale: g,
+    setLocale: l,
+    getLocale: v,
     initTranslations: p,
-    getLanguagePreference: i,
-    currentLocale: a
+    getLanguagePreference: c,
+    currentLocale: t
   };
 }
-const T = { class: "bg-green-500" }, _ = {
+const T = { class: "space-y-8" }, N = { class: "bg-yellow-500" }, h = {
   __name: "App",
-  setup(c) {
-    const { trans: a, setLocale: s, currentLocale: u } = E();
-    return (i, o) => (y(), L("div", null, [
-      f("div", T, m(l(a)("cyvian.static.add")), 1),
-      f("button", {
-        onClick: o[0] || (o[0] = (g) => l(s)("en"))
+  setup(g) {
+    const { trans: a, setLocale: s, currentLocale: d } = S();
+    return (c, t) => (b(), y("div", T, [
+      u("div", N, m(i(a)("cyvian.static.add")), 1),
+      u("button", {
+        class: "mx-2 p-2 border rounded border-blue-400",
+        onClick: t[0] || (t[0] = (l) => i(s)("en"))
       }, "EN"),
-      f("button", {
-        onClick: o[1] || (o[1] = (g) => l(s)("fr"))
+      u("button", {
+        class: "mx-2 p-2 border rounded border-blue-400",
+        onClick: t[1] || (t[1] = (l) => i(s)("fr"))
       }, "FR"),
-      S(" Current locale est: " + m(l(u)), 1)
+      u("div", null, " Current locale is: " + m(i(d)), 1)
     ]));
   }
 };
-b(_).mount("#app");
+L(h).mount("#app");
