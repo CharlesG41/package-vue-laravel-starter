@@ -9,7 +9,7 @@
         <button class="mx-2 p-2 border rounded border-blue-400" @click="setLocale('en')">EN</button>
         <button class="mx-2 p-2 border rounded border-blue-400"  @click="setLocale('fr')">FR</button>
         <div>
-            Current locale is: {{currentLocale}}
+            Current locale is:  {{currentLocale}}
         </div>
     </div>
 </template>
