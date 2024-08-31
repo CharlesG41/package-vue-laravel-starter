@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/charlesg-cms.umd.js",
   "scripts": {
-    "dev": "vite build --watch",
+    "dev": "vite build --watch --mode development",
     "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "post-install-cmd": [

@@ -8,7 +8,8 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, 'src/resources/js/app.js'),
             name: 'CharlesgCms',
-            fileName: (format) => `charlesg-cms.${format}.js`
+            fileName: (format) => `charlesg-cms.${format}.js`,
+            formats: ['es', 'umd']
         },
         rollupOptions: {
             external: ['vue'],
@@ -16,19 +17,7 @@ export default defineConfig({
                 globals: {
                     vue: 'Vue'
                 },
-                assetFileNames: (assetInfo) => {
-                    if (assetInfo.name === 'style.css') return 'charlesg-cms.css';
-                    return assetInfo.name;
-                },
             }
-        }
-    },
-    css: {
-        postcss: {
-            plugins: [
-                require('tailwindcss'),
-                require('autoprefixer'),
-            ],
         }
     },
     resolve: {

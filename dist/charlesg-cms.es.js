@@ -1,74 +1,55 @@
-import { ref as f, openBlock as v, createElementBlock as x, createElementVNode as i, toDisplayString as m, unref as d, createApp as h } from "vue";
-const p = f({}), g = f("");
-function L() {
-  const l = function(n, e = {}) {
-    let t = n.split(".").reduce((o, y) => o == null ? void 0 : o[y], p.value);
-    return typeof t == "string" && Object.keys(e).forEach((o) => {
-      t = t.replace(`:${o}`, e[o]);
-    }), t || n;
-  }, r = (n) => {
-    localStorage.setItem("userLanguage", n);
-  }, a = () => localStorage.getItem("userLanguage") || document.documentElement.lang || "en", c = async function(n) {
+import { ref as d, openBlock as y, createElementBlock as L, createElementVNode as f, toDisplayString as m, unref as l, createTextVNode as S, createApp as b } from "vue";
+function E() {
+  const c = d({}), a = d(""), s = function(t, n = {}) {
+    let e = t.split(".").reduce((r, v) => r == null ? void 0 : r[v], c.value);
+    return typeof e == "string" && Object.keys(n).forEach((r) => {
+      e = e.replace(`:${r}`, n[r]);
+    }), e || t;
+  }, u = (t) => {
+    localStorage.setItem("userLanguage", t);
+  }, i = () => localStorage.getItem("userLanguage") || document.documentElement.lang || "en", o = async function(t) {
     try {
-      const t = await (await fetch("/change-language", {
+      const e = await (await fetch("/change-language", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
         },
-        body: JSON.stringify({ locale: n })
+        body: JSON.stringify({ locale: t })
       })).json();
-      p.value = t.translations, g.value = t.locale, r(t.locale);
-    } catch (e) {
-      console.error("Failed to change language:", e);
+      c.value = e.translations, a.value = e.locale, u(e.locale);
+    } catch (n) {
+      console.error("Failed to change language:", n);
     }
+  }, g = function() {
+    return a.value;
+  }, p = async function(t, n) {
+    const e = i();
+    e !== n ? await o(e) : (c.value = t, a.value = n);
   };
-  return {
-    trans: l,
-    setLocale: c,
-    getLocale: function() {
-      return g.value;
-    },
-    initTranslations: async function(n, e) {
-      const t = a();
-      t !== e ? await c(t) : (p.value = n, g.value = e);
-    },
-    getLanguagePreference: a,
-    currentLocale: g
+  return p(c.value, a.value), {
+    trans: s,
+    setLocale: o,
+    getLocale: g,
+    initTranslations: p,
+    getLanguagePreference: i,
+    currentLocale: a
   };
 }
-const T = {
-  __name: "ExampleComponent",
-  setup(l) {
-    const { trans: r, setLocale: a, getLocale: c, currentLocale: u } = L(), s = async (n) => {
-      console.log("changeLanguage", n), await a(n);
-    };
-    return (n, e) => (v(), x("div", null, [
-      i("button", {
-        onClick: e[0] || (e[0] = (t) => s("en"))
-      }, "English"),
-      i("button", {
-        class: "bg-gray-500 text-white px-4 py-2 rounded-md",
-        onClick: e[1] || (e[1] = (t) => s("fr"))
-      }, "Francasdasdadis tbnk"),
-      i("p", null, "Current language: " + m(d(u)), 1),
-      i("p", null, "Translated text: " + m(d(r)("cyvian.static.add")), 1)
+const T = { class: "bg-green-500" }, _ = {
+  __name: "App",
+  setup(c) {
+    const { trans: a, setLocale: s, currentLocale: u } = E();
+    return (i, o) => (y(), L("div", null, [
+      f("div", T, m(l(a)("cyvian.static.add")), 1),
+      f("button", {
+        onClick: o[0] || (o[0] = (g) => l(s)("en"))
+      }, "EN"),
+      f("button", {
+        onClick: o[1] || (o[1] = (g) => l(s)("fr"))
+      }, "FR"),
+      S(" Current locale est: " + m(l(u)), 1)
     ]));
   }
 };
-function E(l, r) {
-  const a = h({
-    setup() {
-      const { initTranslations: c, getLanguagePreference: u, setLocale: s, trans: n } = L(), e = u();
-      return c(r, e), {
-        setLocale: s,
-        trans: n
-      };
-    },
-    template: "<example-component></example-component>"
-  });
-  a.component("example-component", T), a.mount(l);
-}
-export {
-  E as init
-};
+b(_).mount("#app");

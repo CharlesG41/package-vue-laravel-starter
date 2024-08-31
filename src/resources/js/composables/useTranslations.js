@@ -1,9 +1,9 @@
 import { ref, reactive, watch } from 'vue'
 
-const translations = ref({})
-const currentLocale = ref('')
-
 export function useTranslations() {
+  const translations = ref({})
+  const currentLocale = ref('')
+
   const trans = function(key, replace = {}) {
     let translation = key.split('.').reduce((o, i) => o?.[i], translations.value);
     if (typeof translation === 'string') {
@@ -54,6 +54,8 @@ export function useTranslations() {
       currentLocale.value = initialLocale;
     }
   }
+
+  initTranslations(translations.value, currentLocale.value)
 
   return {
     trans,
