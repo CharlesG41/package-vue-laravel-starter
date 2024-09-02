@@ -1,15 +1,16 @@
 {
-    "name": "charlesg/cms",
-    "description": "A simple cms",
+    "name": "charlesg/package-starter",
+    "description": "A starter package for laravel with vuejs",
     "type": "library",
     "require": {
         "php": "^8.1",
         "laravel/framework": "^10.0",
+        "tightenco/ziggy": "^2.3"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Charlesg\\Cms\\": "src/"
+            "Charlesg\\": "src/"
         }
     },
     "authors": [

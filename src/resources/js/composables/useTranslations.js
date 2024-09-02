@@ -1,9 +1,8 @@
 import { ref, reactive, watch } from 'vue'
 
-export function useTranslations() {
+export default function useTranslations() {
   const initialTranslations = window.__INITIAL_TRANSLATIONS__
   const translations = ref(initialTranslations)
-
 
   const trans = function(key, replace = {}) {
     let translation = key.split('.').reduce((o, i) => o?.[i], translations.value);
@@ -50,7 +49,6 @@ export function useTranslations() {
 
   const initTranslations = async function(initialTranslations, initialLocale) {
     const storedLocale = getLanguagePreference();
-    console.log(storedLocale, initialLocale)
     if (storedLocale !== initialLocale) {
       await setLocale(storedLocale);
     } else {

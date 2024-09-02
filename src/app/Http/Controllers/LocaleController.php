@@ -1,9 +1,9 @@
 <?php
 
-namespace Charlesg\Cms\App\Http\Controllers;
+namespace Charlesg\App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Charlesg\Cms\App\Services\TranslationService;
+use Charlesg\App\Services\TranslationService;
 use Illuminate\Routing\Controller;
 
 class LocaleController extends Controller

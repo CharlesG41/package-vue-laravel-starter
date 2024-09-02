@@ -21,12 +21,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(\Charlesg\Cms\App\Http\Middleware\SetLocaleMiddleware::class) ->group(function() {
+Route::middleware(\Charlesg\App\Http\Middleware\SetLocaleMiddleware::class) ->group(function() {
     Route::get('cms', function() {
-        return view('charlesg-cms/cms');
-    });
+        return view('charlesg/charlesg');
+    })->name('charlesg.home');
 
-    Route::post('/change-language', [Charlesg\Cms\app\Http\Controllers\LocaleController::class, 'changeLanguage'])
+    Route::post('/change-language', [Charlesg\app\Http\Controllers\LocaleController::class, 'changeLanguage'])
         ->name('charlesg.change-language');
 });
 

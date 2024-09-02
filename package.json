@@ -1,8 +1,8 @@
 {
-  "name": "charlesg-cms",
+  "name": "charlesg-package-starter",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/charlesg-cms.umd.js",
+  "main": "dist/charlesg.umd.js",
   "scripts": {
     "dev": "vite build --watch --mode development",
     "build": "vite build",
@@ -21,7 +21,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Charlesg\\Cms\\CharlesgCmsServiceProvider"
+        "Charlesg\\CharlesgServiceProvider"
       ]
     }
   },

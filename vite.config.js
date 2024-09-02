@@ -7,8 +7,8 @@ export default defineConfig({
     build: {
         lib: {
             entry: path.resolve(__dirname, 'src/resources/js/app.js'),
-            name: 'CharlesgCms',
-            fileName: (format) => `charlesg-cms.${format}.js`,
+            name: 'Charlesg',
+            fileName: (format) => `charlesg.${format}.js`,
             formats: ['es', 'umd']
         },
         rollupOptions: {
@@ -23,7 +23,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'src/resources/js'),
-            '@cms': path.resolve(__dirname, 'src/resources/js')
+            '@charlesg': path.resolve(__dirname, 'src/resources/js')
         },
     },
 });

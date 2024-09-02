@@ -1,6 +1,6 @@
 <?php
 
-namespace Charlesg\Cms\app\Services;
+namespace Charlesg\app\Services;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
